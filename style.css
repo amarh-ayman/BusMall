@@ -8,7 +8,7 @@ h1{
     font-size: 50px;
 }
 
-section{
+#section_img{
     height: 300px;
     overflow: hidden ;
 }
@@ -18,9 +18,8 @@ img{
     border: 12px ridge red;
     margin-left:auto;
     float: left;
-
 }
-footer{
+#section_div{
     background-color: rgba(184, 118, 118, 0.781);
     border: 10px ridge red;
     width: 50%;
@@ -35,6 +34,10 @@ footer{
     border: 10px ridge red;
     border-radius: 20px;
     font-size: 40px;
+}
+
+#form_btn input{
+    display:none;
 }
 
 /* button{
