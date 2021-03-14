@@ -6,7 +6,7 @@ let number_of_section=[]; //// for creating element's
 
 const sectionImg =document.getElementById('section_img');
 const sectionDiv =document.getElementById('section_div');
-// let form=document.getElementsByTagName('form');
+let form=document.getElementById('form_btn');
 let pargh=document.getElementById('paragraph_counter');
 
 for(let i=0;i<3;i++){
@@ -46,36 +46,36 @@ function showData(event){
         for(let i=0;i<Product.all.length;i++){
           if (Product.all[i].name === event.target.title){
               Product.all[i].votes++;
-              Product.all[i].views++;
+              Product.all[i].views++;   }
           }
-         }
-   }
+        }
    else  {
     for(let i=0;i<Product.all.length;i++)
         if (Product.all[i].name === number_of_section[j].title){
-            Product.all[i].views++;}
+            Product.all[i].views++;     }
         }
     }    
            
     counter++;   
     render();
     pargh.innerHTML=counter;
-   
-    
+       
      if(counter===25){
-            for(let i=0;i<Product.all.length;i++){
-                let items=document.createElement('li');
-                items.innerHTML=Product.all[i].name +' had '+Product.all[i].votes+' Votes, and was Seen '+Product.all[i].views+ ' times.';
-                sectionDiv.appendChild(items);
-            }
-        }
+          form.addEventListener('button', result_output);
+           sectionImg.removeEventListener('click',showData);
     }
-          
+}
   
      sectionImg.addEventListener('click',showData);
 
 ////////////////////////////////////////////////
-    
-     
+         render();
 
-render();
+function result_output(){
+    for(let i=0;i<Product.all.length;i++){
+        let items=document.createElement('li');
+        items.innerHTML=Product.all[i].name +' had '+Product.all[i].votes+' Votes, and was Seen '+Product.all[i].views+ ' times.';
+        sectionDiv.appendChild(items);
+    }
+}
+
