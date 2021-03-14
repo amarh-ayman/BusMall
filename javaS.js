@@ -6,7 +6,7 @@ let number_of_section=[]; //// for creating element's
 
 const sectionImg =document.getElementById('section_img');
 const sectionDiv =document.getElementById('section_div');
-// let form=document.getElementsByTagName('form');
+let form=document.getElementById('form_btn');
 let pargh=document.getElementById('paragraph_counter');
 
 for(let i=0;i<3;i++){
@@ -61,7 +61,7 @@ function showData(event){
     pargh.innerHTML=counter;
        
      if(counter===25){
-           result_output();
+          form.addEventListener('button', result_output);
            sectionImg.removeEventListener('click',showData);
     }
 }
@@ -78,3 +78,4 @@ function result_output(){
         sectionDiv.appendChild(items);
     }
 }
+
