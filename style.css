@@ -1,0 +1,48 @@
+*{
+    font-family: sans-serif;
+}
+
+h1{
+    background-color: brown;
+    text-align: center;
+    font-size: 50px;
+}
+
+section{
+    height: 300px;
+    overflow: hidden ;
+}
+img{
+    width: 30%;
+    height: 80%;
+    border: 12px ridge red;
+    margin-left:auto;
+    float: left;
+
+}
+footer{
+    background-color: rgba(184, 118, 118, 0.781);
+    border: 10px ridge red;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: -100px;
+}
+
+#paragraph_counter{
+    background-color: aqua;
+    height: 50px;
+    width: 50px;
+    border: 10px ridge red;
+    border-radius: 20px;
+    font-size: 40px;
+}
+
+/* button{
+    width: 120px;
+    height: 30px;
+    background-color: brown;
+    border: 5px ridge brown;
+    border-radius: 30px;
+    font: 20px bold;
+    text-align: center;
+} */
