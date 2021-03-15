@@ -6,7 +6,6 @@ const image_name_Ext =[['bag','jpg'],['banana','jpg'],['bathroom','jpg'],['boots
 
 let number_of_section=[]; //// for creating element's
 
-const sectionImg =document.getElementById('section_img');
 const sectionDiv =document.getElementById('section_div');
 let forButton=document.getElementById('forButton');
 let btn=document.createElement('button');
@@ -19,11 +18,10 @@ btn.style.background='rgba(184, 118, 118, 0.781);';
 btn.style.border='5px ridge red';
 btn.style.color='black';
 btn.style.display='none';
-btn.style.transition
 
 for(let i=0;i<3;i++){
   number_of_section[i]=document.createElement('img');
-  sectionImg.appendChild(number_of_section[i]);
+  document.body.appendChild(number_of_section[i]);
   number_of_section[i].setAttribute('id',`imgID${i}`);
 }
 
@@ -46,13 +44,23 @@ function randomNumber(min, max) {
 function render(){
   for(let i=0;i<3;i++){
     const index=randomNumber(0,Product.all.length-1);
-    number_of_section[i].src=Product.all[index].path;
-    number_of_section[i].title=Product.all[index].name;
+    let uniqueIndex=unique(index);
+    number_of_section[i].src=Product.all[uniqueIndex].path;
+    number_of_section[i].title=Product.all[uniqueIndex].name;
   }
 }
 
-let counter=0;
+let unique_indx_1=-1, unique_indx_2=-1;
+function unique(indx){
+  while(unique_indx_1===indx || unique_indx_2===indx){
+    indx=randomNumber(0,Product.all.length-1);
+  }
+  unique_indx_2=unique_indx_1;
+  unique_indx_1=indx;
+  return unique_indx_1;
+}
 
+let counter=0;
 function showData(event){
   for(let j=0 ;j<3;j++){
     if(event.target.id===number_of_section[j].id){
@@ -66,21 +74,23 @@ function showData(event){
     else {
       for(let i=0;i<Product.all.length;i++)
         if (Product.all[i].name === number_of_section[j].title){
-          Product.all[i].views++; }
+          Product.all[i].views++;
+        }
     }
   }
   counter++;
   render();
   pargh.innerHTML=counter;
-
   if(counter===25){
     btn.style.display='block';
     btn.addEventListener('click', result_output);
-    sectionImg.removeEventListener('click',showData);
+    for(let i=0; i<3;i++){
+      number_of_section[i].removeEventListener('click',showData); }
   }
 }
-sectionImg.addEventListener('click',showData);
-
+for(let i=0; i<3;i++){
+  number_of_section[i].addEventListener('click',showData);
+}
 ////////////////////////////////////////////////
 render();
 

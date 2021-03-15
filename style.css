@@ -8,23 +8,21 @@ h1{
     font-size: 50px;
 }
 
-#section_img{
-    height: 300px;
-    overflow: hidden ;
-}
 img{
-    width: 30%;
-    height: 80%;
+    width: 25%;
+    height: 300px;
     border: 12px ridge red;
-    margin-left:auto;
     float: left;
+    margin:50px 30px ;
+    position:relative;
 }
 #section_div{
     background-color: rgba(184, 118, 118, 0.781);
     border: 10px ridge red;
     width: 50%;
-    margin-left: 25%;
-    margin-top: -100px;
+    margin-left: 22%;
+    margin-top: 400px;
+    position:absolute;
 }
 
 #paragraph_counter{
@@ -34,12 +32,14 @@ img{
     border: 10px ridge red;
     border-radius: 20px;
     font-size: 40px;
-}
-
-#form_btn input{
-    display:none;
+    margin-top: 400px;
+    position:absolute;
+    
 }
 
 #forButton{
     margin: auto;
+    position:absolute;
+    margin-top:420px ;
+    margin-left: 100px;
 }
