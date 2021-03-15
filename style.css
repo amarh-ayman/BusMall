@@ -40,6 +40,10 @@ img{
     display:none;
 }
 
+button{
+    margin-top: -100px;
+}
+
 /* button{
     width: 120px;
     height: 30px;
