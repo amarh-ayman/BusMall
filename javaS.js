@@ -6,18 +6,7 @@ const image_name_Ext =[['bag','jpg'],['banana','jpg'],['bathroom','jpg'],['boots
 
 let number_of_section=[]; //// for creating element's
 
-const sectionDiv =document.getElementById('section_div');
-let forButton=document.getElementById('forButton');
-let btn=document.createElement('button');
-btn.innerHTML='Show REsult';
-forButton.appendChild(btn);
 let pargh=document.getElementById('paragraph_counter');
-
-btn.style.width='100px';
-btn.style.background='rgba(184, 118, 118, 0.781);';
-btn.style.border='5px ridge red';
-btn.style.color='black';
-btn.style.display='none';
 
 for(let i=0;i<3;i++){
   number_of_section[i]=document.createElement('img');
@@ -41,25 +30,84 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function render(){
+let uniqueIndexArray=[-1];
+let iteration=1;
+function render(){////////////////////////////////for creating img's with hint name in web page
   for(let i=0;i<3;i++){
     const index=randomNumber(0,Product.all.length-1);
     let uniqueIndex=unique(index);
     number_of_section[i].src=Product.all[uniqueIndex].path;
     number_of_section[i].title=Product.all[uniqueIndex].name;
   }
+  iteration++;
+  if(iteration%3===0)
+  {uniqueIndexArray=[-1];}
 }
+///////////////////////////////////////////////////////////////////make a unique index by #of iteration's
 
-let unique_indx_1=-1, unique_indx_2=-1;
 function unique(indx){
-  while(unique_indx_1===indx || unique_indx_2===indx){
+  while(uniqueIndexArray.includes(indx) ){
     indx=randomNumber(0,Product.all.length-1);
   }
-  unique_indx_2=unique_indx_1;
-  unique_indx_1=indx;
-  return unique_indx_1;
+  uniqueIndexArray.push(indx);
+  return indx;
 }
 
+function createChart(){///////////////////////////////////////for chartJS
+  let context = document.getElementById('myChart').getContext('2d');
+  let productViews=[];
+  let productVotes=[];
+  let productNames=[];
+
+  for(let i=0;i<Product.all.length;i++){
+    productNames.push(Product.all[i].name);
+    productViews.push(Product.all[i].views);
+    productVotes.push(Product.all[i].votes);
+  }
+
+  //////////////////////////////////////////////////////////////Creating Chart using ChartJS Amazing Part
+  let chartObject={
+    type: 'bar',
+    data: {
+      labels:productNames,
+      datasets: [{//////////////////////////have two type of dataset's one for Voting and other for View's , if u want to add anything to additional just use array for example multiColor's
+        label: 'Product Voting results',
+        backgroundColor: 'rgba(216, 27, 96, 0.6)',
+        borderColor: 'rgba(216, 27, 96, 1.5)' ,
+        data:productVotes
+      }
+      ,{
+        label: 'Product Views results',
+        backgroundColor: 'rgba(26, 217, 96, 0.6)',
+        borderColor: 'rgba(26, 217, 96, 1.5)',
+        data: productViews
+      },
+      ],borderWidth: 1
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          barPercentage: 1
+        }],
+        yAxes: [{
+          barPercentage: 1
+        }],
+      },
+      legend: {
+        display: true
+      },
+      title: {
+        display: true,
+        text: 'BusMall Product\'s Depend On Custmer\'s Opinion ',
+        position: 'top',
+        fontSize: 16,
+        padding: 20
+      },
+    }
+  };
+  let chart = new Chart(context,chartObject);
+}
+////////////////////////////////////////////////////////////////////////////the Result Section
 let counter=0;
 function showData(event){
   for(let j=0 ;j<3;j++){
@@ -82,24 +130,16 @@ function showData(event){
   render();
   pargh.innerHTML=counter;
   if(counter===25){
-    btn.style.display='block';
-    btn.addEventListener('click', result_output);
     for(let i=0; i<3;i++){
       number_of_section[i].removeEventListener('click',showData); }
+    createChart();
   }
+
 }
 for(let i=0; i<3;i++){
   number_of_section[i].addEventListener('click',showData);
 }
-////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////render for seeing the first iteration of 3 Pic's
 render();
 
-function result_output(){
-
-  for(let i=0;i<Product.all.length;i++){
-    let items=document.createElement('li');
-    items.innerHTML=Product.all[i].name +' had '+Product.all[i].votes+' Votes, and was Seen '+Product.all[i].views+ ' times.';
-    sectionDiv.appendChild(items);
-  }
-}
 
