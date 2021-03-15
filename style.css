@@ -16,14 +16,6 @@ img{
     margin:50px 30px ;
     position:relative;
 }
-#section_div{
-    background-color: rgba(184, 118, 118, 0.781);
-    border: 10px ridge red;
-    width: 50%;
-    margin-left: 22%;
-    margin-top: 400px;
-    position:absolute;
-}
 
 #paragraph_counter{
     background-color: aqua;
@@ -37,9 +29,8 @@ img{
     
 }
 
-#forButton{
-    margin: auto;
+section{
     position:absolute;
-    margin-top:420px ;
-    margin-left: 100px;
+    margin: 500px 0 0 100px;
 }
+
