@@ -19,7 +19,6 @@ btn.style.background='rgba(184, 118, 118, 0.781);';
 btn.style.border='5px ridge red';
 btn.style.color='black';
 btn.style.display='none';
-btn.style.transition
 
 for(let i=0;i<3;i++){
   number_of_section[i]=document.createElement('img');
