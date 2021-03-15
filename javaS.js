@@ -8,10 +8,18 @@ let number_of_section=[]; //// for creating element's
 
 const sectionImg =document.getElementById('section_img');
 const sectionDiv =document.getElementById('section_div');
-let form=document.getElementById('form_btn');
-let btn=document.getElementsByTagName('input');
+let forButton=document.getElementById('forButton');
+let btn=document.createElement('button');
+btn.innerHTML='Show REsult';
+forButton.appendChild(btn);
 let pargh=document.getElementById('paragraph_counter');
-form.appendChild(btn);
+
+btn.style.width='100px';
+btn.style.background='rgba(184, 118, 118, 0.781);';
+btn.style.border='5px ridge red';
+btn.style.color='black';
+btn.style.display='none';
+btn.style.transition
 
 for(let i=0;i<3;i++){
   number_of_section[i]=document.createElement('img');
@@ -66,7 +74,8 @@ function showData(event){
   pargh.innerHTML=counter;
 
   if(counter===25){
-    form.addEventListener('button', result_output);
+    btn.style.display='block';
+    btn.addEventListener('click', result_output);
     sectionImg.removeEventListener('click',showData);
   }
 }
@@ -76,6 +85,7 @@ sectionImg.addEventListener('click',showData);
 render();
 
 function result_output(){
+
   for(let i=0;i<Product.all.length;i++){
     let items=document.createElement('li');
     items.innerHTML=Product.all[i].name +' had '+Product.all[i].votes+' Votes, and was Seen '+Product.all[i].views+ ' times.';
