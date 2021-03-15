@@ -40,16 +40,6 @@ img{
     display:none;
 }
 
-button{
-    margin-top: -100px;
+#forButton{
+    margin: auto;
 }
-
-/* button{
-    width: 120px;
-    height: 30px;
-    background-color: brown;
-    border: 5px ridge brown;
-    border-radius: 30px;
-    font: 20px bold;
-    text-align: center;
-} */

@@ -8,17 +8,18 @@ let number_of_section=[]; //// for creating element's
 
 const sectionImg =document.getElementById('section_img');
 const sectionDiv =document.getElementById('section_div');
-let form=document.getElementById('form_btn');
+let forButton=document.getElementById('forButton');
 let btn=document.createElement('button');
-btn.innerHTML='click meee';
-document.body.appendChild(btn);
+btn.innerHTML='Show REsult';
+forButton.appendChild(btn);
 let pargh=document.getElementById('paragraph_counter');
 
-btn.style.width='50px';
+btn.style.width='100px';
 btn.style.background='rgba(184, 118, 118, 0.781);';
 btn.style.border='5px ridge red';
 btn.style.color='black';
 btn.style.display='none';
+btn.style.transition
 
 for(let i=0;i<3;i++){
   number_of_section[i]=document.createElement('img');
