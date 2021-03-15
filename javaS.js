@@ -30,8 +30,8 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let uniqueIndexArray=[-1];
-let iteration=1;
+let uniqueIndexArray=[];
+let iteration=0;
 function render(){////////////////////////////////for creating img's with hint name in web page
   for(let i=0;i<3;i++){
     const index=randomNumber(0,Product.all.length-1);
@@ -40,8 +40,10 @@ function render(){////////////////////////////////for creating img's with hint n
     number_of_section[i].title=Product.all[uniqueIndex].name;
   }
   iteration++;
-  if(iteration%3===0)
-  {uniqueIndexArray=[-1];}
+  if(iteration>=2)
+  {uniqueIndexArray.splice(0,3);
+  //  console.log(uniqueIndexArray);
+  }
 }
 ///////////////////////////////////////////////////////////////////make a unique index by #of iteration's
 
