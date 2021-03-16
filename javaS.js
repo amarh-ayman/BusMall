@@ -14,16 +14,18 @@ for(let i=0;i<3;i++){
   number_of_section[i].setAttribute('id',`imgID${i}`);
 }
 
-function Product(name,imgExt){
+function Product(name,imgExt,votes){
   this.name=name;
   this.views=0;
-  this.votes=0;
+  this.votes=votes;
   this.path=`./assets/${name}.${imgExt}`;//it will take the name of url from the array which we made before depend on the name in it's own url
   Product.all.push(this); ///instead of put one by one , using this do all process ..... cute hmm..
 }
 Product.all=[];
 for(let i=0;i<image_name_Ext.length;i++){
-  new Product(image_name_Ext[i][0],image_name_Ext[i][1]);
+  let votes=0;
+  if(localStorage.getItem('Product')!==null){ votes=JSON.parse(localStorage.getItem('Product'))[i].votes; console.log('not null');}
+  new Product(image_name_Ext[i][0],image_name_Ext[i][1] , votes);
 }
 
 function randomNumber(min, max) {
@@ -54,6 +56,12 @@ function unique(indx){
   uniqueIndexArray.push(indx);
   return indx;
 }
+/////////////////////////////////////////////////////////////////////// local Storage , Function for saving Votes
+//let i=localStorage.getItem('Product');
+function localStorageProduct(){
+  let localProduct=JSON.stringify(Product.all);
+  localStorage.setItem('Product',localProduct);
+}
 
 function createChart(){///////////////////////////////////////for chartJS
   let context = document.getElementById('myChart').getContext('2d');
@@ -68,19 +76,61 @@ function createChart(){///////////////////////////////////////for chartJS
   }
 
   //////////////////////////////////////////////////////////////Creating Chart using ChartJS Amazing Part
-  let chartObject={
+  let chartObject ={
     type: 'bar',
     data: {
       labels:productNames,
       datasets: [{//////////////////////////have two type of dataset's one for Voting and other for View's , if u want to add anything to additional just use array for example multiColor's
         label: 'Product Voting results',
-        backgroundColor: 'rgba(216, 27, 96, 0.6)',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.4)',
+          'rgba(54, 162, 235, 0.4)',
+          'rgba(255, 206, 86, 0.4)',
+          'rgba(75, 192, 192, 0.4)',
+          'rgba(153, 102, 255, 0.4)',
+          'rgba(255, 159, 64, 0.4)',
+          'rgba(255, 99, 132, 0.4)',
+          'rgba(54, 162, 235, 0.4)',
+          'rgba(255, 206, 86, 0.4)',
+          'rgba(75, 192, 192, 0.4)',
+          'rgba(153, 102, 255, 0.4)',
+          'rgba(255, 159, 64, 0.4)',
+          'rgba(255, 99, 132, 0.4)',
+          'rgba(54, 162, 235, 0.4)',
+          'rgba(255, 206, 86, 0.4)',
+          'rgba(75, 192, 192, 0.4)',
+          'rgba(153, 102, 255, 0.4)',
+          'rgba(255, 159, 64, 0.4)',
+          'rgba(153, 102, 255, 0.4)',
+          'rgba(255, 159, 64, 0.4)',
+        ],
         borderColor: 'rgba(216, 27, 96, 1.5)' ,
         data:productVotes
       }
       ,{
         label: 'Product Views results',
-        backgroundColor: 'rgba(26, 217, 96, 0.6)',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+        ],
         borderColor: 'rgba(26, 217, 96, 1.5)',
         data: productViews
       },
@@ -114,6 +164,7 @@ let counter=0;
 function showData(event){
   for(let j=0 ;j<3;j++){
     if(event.target.id===number_of_section[j].id){
+      //console.log(number_of_section[j].id);
       for(let i=0;i<Product.all.length;i++){
         if (Product.all[i].name === event.target.title){
           Product.all[i].votes++;
@@ -127,6 +178,8 @@ function showData(event){
           Product.all[i].views++;
         }
     }
+    localStorageProduct();
+
   }
   counter++;
   render();
