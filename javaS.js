@@ -184,7 +184,7 @@ function showData(event){
   counter++;
   render();
   pargh.innerHTML=counter;
-  if(counter===5){
+  if(counter===25){
     for(let i=0; i<3;i++){
       number_of_section[i].removeEventListener('click',showData); }
     createChart();
